@@ -26,18 +26,18 @@
 | ------------------ | ------------ | ------------------------ |
 | name               | string       | null: false              |
 | explanation        | text         | null: false              |
-| category_id        | integer       | null: false             |
-| status             | string       | null: false              |
-| delivery_fee       | string       | null: false              |
-| prefecture_id      | integer       | null: false             |
-| delivery_days      | string       | null: false              |
+| category_id        | integer      | null: false              |
+| state_id           | integer      | null: false              |
+| delivery_fee_id    | integer       | null: false             |
+| prefecture_id      | integer      | null: false              |
+| delivery_day_id    | integer       | null: false             |
 | price              | integer      | null: false              |
 | user               | references   | null: false, foreign_key: true             |
 
 
 ### Association
 
-- belongs to :user
+- belongs_to :user
 - has_one :order
 
 
@@ -55,7 +55,7 @@
 
 ### Association
 
-- belongs to :order
+- belongs_to :order
 
 ## orders テーブル
 
