@@ -16,7 +16,8 @@
 ### Association
 
 - has_many :items
-
+- has_many :orders
+- has_many :items, through: :orders
 
 
 ## items テーブル
@@ -37,7 +38,8 @@
 ### Association
 
 - belongs to :user
-
+- has_many :orders
+- has_many :users, through: :orders
 
 ## profiles テーブル
 
@@ -50,3 +52,15 @@
 | building           | string     |                                |
 | phone_number       | integer    | null: false                    |
 
+
+## orders テーブル
+
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :item
+- belongs_to :user
