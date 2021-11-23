@@ -11,29 +11,27 @@
 | first_name         | string | null: false              |
 | last_name_kana     | string | null: false              |
 | first_name_kana    | string | null: false              |
-| birth_year         | string | null: false              |
-| birth_month        | string | null: false              |
-| birth_day          | string | null: false              |
+| birth_day          | date   | null: false              |
 
 ### Association
 
 - has_many :items
-- has_one :profile
+
 
 
 ## items テーブル
 
 | Column             | Type         | Options                  |
 | ------------------ | ------------ | ------------------------ |
-| name               | text         | null: false              |
+| name               | string       | null: false              |
 | explanation        | text         | null: false              |
-| category           | string       | null: false              |
+| category_id        | string       | null: false              |
 | status             | string       | null: false              |
 | delivery_fee       | string       | null: false              |
-| delivery_area      | string       | null: false              |
+| prefecture_id      | string       | null: false              |
 | delivery_days      | string       | null: false              |
-| price              | string       | null: false              |
-| user_id            | references   | null: false, foreign_key: true             |
+| price              | integer      | null: false              |
+| user               | references   | null: false, foreign_key: true             |
 
 
 ### Association
@@ -46,13 +44,9 @@
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | postal             | string     | null: false                    |
-| prefectures        | string     | null: false                    |
+| prefecture_id      | string     | null: false                    |
 | municipality       | string     | null: false                    |
 | address            | string     | null: false                    |
 | building           | string     |                                |
-| phone_number       |            | null: false                    |
-| user_id            | references | null: false, foreign_key: true |
+| phone_number       | integer    | null: false                    |
 
-### Association
-
-- belongs to :user
