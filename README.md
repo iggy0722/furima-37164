@@ -17,7 +17,7 @@
 
 - has_many :items
 - has_many :orders
-- has_many :items, through: :orders
+
 
 
 ## items テーブル
@@ -26,10 +26,10 @@
 | ------------------ | ------------ | ------------------------ |
 | name               | string       | null: false              |
 | explanation        | text         | null: false              |
-| category_id        | string       | null: false              |
+| category_id        | integer       | null: false             |
 | status             | string       | null: false              |
 | delivery_fee       | string       | null: false              |
-| prefecture_id      | string       | null: false              |
+| prefecture_id      | integer       | null: false             |
 | delivery_days      | string       | null: false              |
 | price              | integer      | null: false              |
 | user               | references   | null: false, foreign_key: true             |
@@ -38,20 +38,24 @@
 ### Association
 
 - belongs to :user
-- has_many :orders
-- has_many :users, through: :orders
+- has_one :order
+
 
 ## profiles テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | postal             | string     | null: false                    |
-| prefecture_id      | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | municipality       | string     | null: false                    |
 | address            | string     | null: false                    |
 | building           | string     |                                |
-| phone_number       | integer    | null: false                    |
+| phone_number       | string     | null: false                    |
+| order              | references | null: false, foreign_key: true |
 
+### Association
+
+- belongs to :order
 
 ## orders テーブル
 
@@ -64,3 +68,4 @@
 
 - belongs_to :item
 - belongs_to :user
+- has_one :profile
