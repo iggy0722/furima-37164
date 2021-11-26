@@ -68,7 +68,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Delivery day can't be blank")
       end
       it 'delivery_day_id「---」が選択されている場合は保存できない' do
-        @item.delivery_day_id = ''
+        @item.delivery_day_id = '1'
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery day can't be blank")
       end
