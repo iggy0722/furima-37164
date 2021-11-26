@@ -17,7 +17,7 @@ class Item < ApplicationRecord
   validates :delivery_fee_id, presence: true
   validates :prefecture_id, presence: true
   validates :delivery_day_id, presence: true
-  validates :price, presence: true
+  validates :price, presence: true, inclusion: { in: 300..9999999 }
   validates :user, presence: true
   validates :image, presence: true
 end
