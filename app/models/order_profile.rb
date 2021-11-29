@@ -11,4 +11,9 @@ class OrderProfile
     validates :item_id
   end
   validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"}
+
+  def save
+    order = Order.create(item_id: item_id, user_id: user_id)
+    Address.create(postal: postal, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number, order_id: order.id)
+  end
 end
