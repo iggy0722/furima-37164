@@ -6,7 +6,7 @@ class OrderProfile
     validates :postal, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :municipality
     validates :address
-    validates :phone_number, numericality: {only_integer: true, greater_than_or_equal_to: 10, less_than_or_equal_to: 11, message: 'is invalid'}
+    validates :phone_number, length: { in: 10..11 }
     validates :user_id
     validates :item_id
   end
@@ -14,6 +14,6 @@ class OrderProfile
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
-    Address.create(postal: postal, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number, order_id: order.id)
+    Profile.create(postal: postal, prefecture_id: prefecture_id, municipality: municipality, address: address, building: building, phone_number: phone_number, order_id: order.id)
   end
 end

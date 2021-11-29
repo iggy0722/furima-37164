@@ -3,19 +3,18 @@ class OrdersController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
-  end
-
-  def new
     @order_profile = OrderProfile.new
   end
 
+
   def create
-    @order_profile = OrderProfile.new.new(order_params)
+    @item = Item.find(params[:item_id])
+    @order_profile = OrderProfile.new(order_params)
     if @order_profile.valid?
       @order_profile.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 
