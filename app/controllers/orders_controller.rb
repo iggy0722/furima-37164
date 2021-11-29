@@ -6,7 +6,6 @@ class OrdersController < ApplicationController
     @order_profile = OrderProfile.new
   end
 
-
   def create
     @item = Item.find(params[:item_id])
     @order_profile = OrderProfile.new(order_params)
@@ -22,11 +21,13 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order_profile).permit(:postal, :prefecture_id, :municipality, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:order_profile).permit(:postal, :prefecture_id, :municipality, :address, :building, :phone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: @order_profile.token,
