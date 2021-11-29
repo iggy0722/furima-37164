@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_set
+  before_action :item_soldout
 
   def index
-    @item = Item.find(params[:item_id])
     @order_profile = OrderProfile.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_profile = OrderProfile.new(order_params)
     if @order_profile.valid?
       pay_item
@@ -33,5 +33,15 @@ class OrdersController < ApplicationController
       card: @order_profile.token,
       currency: 'jpy'
     )
+  end
+
+  def item_set
+    @item = Item.find(params[:item_id])
+  end
+
+  def item_soldout
+    if @item.order
+      redirect_to root_path
+    end
   end
 end
