@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :item_set
   before_action :item_soldout
+  before_action :item_empty
 
   def index
     @order_profile = OrderProfile.new
@@ -41,5 +42,10 @@ class OrdersController < ApplicationController
 
   def item_soldout
     redirect_to root_path if @item.user.id == current_user.id
+  end
+
+  def item_empty
+    if @item.order
+      redirect_to root_path
   end
 end
