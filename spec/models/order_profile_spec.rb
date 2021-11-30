@@ -60,6 +60,11 @@ RSpec.describe OrderProfile, type: :model do
         @order_profile.valid?
         expect(@order_profile.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'phone_numberに半角数字以外が含まれている場合は保存できないこと' do
+        @order_profile.phone_number = '09011112a'
+        @order_profile.valid?
+        expect(@order_profile.errors.full_messages).to include('Phone number is invalid')
+      end
       it 'tokenが空では登録できないこと' do
         @order_profile.token = nil
         @order_profile.valid?
