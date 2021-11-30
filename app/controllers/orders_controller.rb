@@ -40,6 +40,7 @@ class OrdersController < ApplicationController
   end
 
   def item_soldout
-    redirect_to root_path if @item.order
+    if @item.order
+    redirect_to root_path
   end
 end
