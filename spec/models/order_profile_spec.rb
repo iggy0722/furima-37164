@@ -5,7 +5,7 @@ RSpec.describe OrderProfile, type: :model do
     before do
       item = FactoryBot.create(:item)
       user = FactoryBot.create(:user)
-      @order_profile = FactoryBot.build(:order_profile, item_id: :item_id, user_id: user.id)
+      @order_profile = FactoryBot.build(:order_profile, item_id: item.id, user_id: user.id)
       sleep 0.1
     end
 
@@ -50,12 +50,12 @@ RSpec.describe OrderProfile, type: :model do
         @order_profile.valid?
         expect(@order_profile.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが11桁以上だと保存できないこと' do
+      it 'phone_numberが12桁以上だと保存できないこと' do
         @order_profile.phone_number = '090111122223'
         @order_profile.valid?
         expect(@order_profile.errors.full_messages).to include('Phone number is invalid')
       end
-      it 'phone_numberが10桁以内だと保存できないこと' do
+      it 'phone_numberが9桁以内だと保存できないこと' do
         @order_profile.phone_number = '090111122'
         @order_profile.valid?
         expect(@order_profile.errors.full_messages).to include('Phone number is invalid')

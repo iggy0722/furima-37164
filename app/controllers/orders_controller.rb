@@ -40,7 +40,6 @@ class OrdersController < ApplicationController
   end
 
   def item_soldout
-    if @item.order
-    redirect_to root_path
+    redirect_to root_path if @item.user.id == current_user.id
   end
 end
