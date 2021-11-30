@@ -45,7 +45,6 @@ class OrdersController < ApplicationController
   end
 
   def item_empty
-    if @item.order
-      redirect_to root_path
+      redirect_to root_path if @item.order
   end
 end
