@@ -53,17 +53,27 @@ RSpec.describe OrderProfile, type: :model do
       it 'phone_numberが11桁以上だと保存できないこと' do
         @order_profile.phone_number = '090111122223'
         @order_profile.valid?
-        expect(@order_profile.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+        expect(@order_profile.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberが10桁以内だと保存できないこと' do
         @order_profile.phone_number = '090111122'
         @order_profile.valid?
-        expect(@order_profile.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
+        expect(@order_profile.errors.full_messages).to include('Phone number is invalid')
       end
       it 'tokenが空では登録できないこと' do
         @order_profile.token = nil
         @order_profile.valid?
         expect(@order_profile.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'userが紐付いていないと保存できないこと' do
+        @order_profile.user_id = nil
+        @order_profile.valid?
+        expect(@order_profile.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていないと保存できないこと' do
+        @order_profile.item_id = nil
+        @order_profile.valid?
+        expect(@order_profile.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

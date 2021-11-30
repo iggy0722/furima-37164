@@ -6,7 +6,7 @@ class OrderProfile
     validates :postal, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :municipality
     validates :address
-    validates :phone_number, length: { in: 10..11 }
+    validates :phone_number, format: { with: /\A\d{10,11}\z/ }
     validates :user_id
     validates :item_id
     validates :token
